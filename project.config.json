@@ -1,0 +1,17 @@
+{
+	"miniprogramRoot": "dist/",
+	"projectname": "RNTransfrom",
+	"description": "taro 项目探索",
+	"appid": "touristappid",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.4.2",
+	"condition": {}
+}
