@@ -16,8 +16,8 @@ npm i @tarojs/taro-weapp
 
 #### 构建项目
 1. taro-transformer-wx 需要tsc编译出lib文件夹
-2. 
-
+2. taro改动需要build taro-weapp
+ 
 > ###  **Test Point**
 #### 特性测试
 
@@ -46,20 +46,33 @@ npm i @tarojs/taro-weapp
 > #####  **组件**
 
 1. 属性传递
-    - 事件
-      - 事件方法绑定的必须是`arrow function`的形式定义的class的方法，否则this指向错误
+    - 方法/回调
+      - [x] 事件方法绑定的必须是`arrow function`的形式定义的class的方法，否则this指向错误
+      - [ ] 事件通过 wx的 customeEvent的形式触发的，所以父组件传递下去的方法事实上是不会有任何返回的，所以**不可以通过传递方法给子组件使用来使得自组件获取父组件中定义的任何内容，eg. ListView的renderRow的这种用法**
+      - [x] 事件handler命名必须 `on`开头
     - 组件
-    - 数据
+      - [x] 不支持 替代方案是使用*组合组件 5*方式,
+
+    - 数据 Ok
     - 命名问题
-      -  `on`开头的方法有特殊待遇
+      -  `on`开头的方法有特殊待遇，这个属性名被被当作事件触发
         
 2. children的使用
-   
-3. Rn中的组件和wx组件
+    - **请不要对 this.props.children 进行任何操作**
+      this.props.children[0] 在 Taro 中都是非法的
 
-4. `不支持` 纯函数当做组件
+    - **不能把 this.props.children 分解为变量再使用**
+      你必须显性地把 this.props.children 全部都写完整才能实现它的功能, 不能先xx=this.props 之后用{xx.children}的形式使用
+
+3. `不支持` 纯函数当做组件, 替代：可以使用一般组件写法定义
+   **并且JSX元素不能出现在render方法之外的地方**
    
-5. 组件差异
+4. 组件的组合
+    组件的组合需要遵守 this.props.children 的所有规则。组合这个功能和 this.props.children 一样是通过 slot 实现的，也就是说 this.props.children 的限制对于组件组合也都同样适用。
+    所有组合都必须用 `render` 开头，且遵守驼峰式命名法。和我们的事件规范以 on 开头一样，组件组合使用 `render` 开头。
+    组合只能传入单个 JSX 元素，不能传入其它任何类型。当你需要进行一些条件判断或复杂逻辑操作的时候，可以使用一个 Block 元素包裹住，然后在 Block 元素的里面填充其它复杂的逻辑。
+
+5. Rn中的组件和wx组件差异
 
 > #####  **路由/页面跳转**
 

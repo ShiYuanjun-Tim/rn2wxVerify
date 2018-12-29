@@ -26,16 +26,16 @@ export default class Page extends Component {
         <Text style={{fontSize: 20, color:"red"}}>check the font and color</Text>
 
         <Text>2 flex layout compare column [half] </Text>
-        <View style={{height: 100 , }}>
-          <View style={{flex:1,height: 30,width: 30 , backgroundColor:"blue"}}></View>
-          <View style={{flex:1,height: 30,width: 30 , backgroundColor:"red"}}></View>
+        <View style={{height: 100  ,display:"flex" }}>
+          <View style={{flex:1, height: 50,width: 50 ,backgroundColor:"red"}}></View>
+          <View style={{flex:2, height: 40,width: 40 ,backgroundColor:"blue"}}></View>
           <View style={{flex:1,height: 30,width: 30 , backgroundColor:"green"}}></View>
         </View>
 
         <Text>3 flex layout compare row [half] </Text>
         <View style={{height: 100 ,flexDirection:"row" }}>
           <View style={{flex:1,height: 30,width: 30 , backgroundColor:"blue"}}></View>
-          <View style={{flex:1,height: 30,width: 30 , backgroundColor:"red"}}></View>
+          <View style={{flex:2,height: 30,width: 30 , backgroundColor:"red"}}></View>
           <View style={{flex:1,height: 30,width: 30 , backgroundColor:"green"}}></View>
         </View>
 
