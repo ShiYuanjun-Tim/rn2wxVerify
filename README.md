@@ -2,12 +2,16 @@
 配合[taro-rn2wx分支代码](https://github.com/ShiYuanjun-Tim/taro) 做转化测试
 
 > ###  **Prerequest**
+安装依赖时node版本不能太高推荐8以上10一下
+
 #### npm包依赖 
 ```
 npm install babel-preset-env --save-dev
 npm install babel-plugin-transform-decorators-legacy --save-dev 
-npm i @tarojs/plugin-babel
-npm i @tarojs/taro-weapp
+
+<!-- use npm link to install the followings packages in rn2wx branched  -->
+npm link the-path-to-@tarojs/plugin-babel
+npm link the-path-to-@tarojs/taro-weapp
 ```
 #### config file
 1. config folder with config
@@ -23,6 +27,8 @@ npm i @tarojs/taro-weapp
 
 > ##### **语法**
   - 含有 JSX 的 switch case 语句必须每种情况都用花括号 `{}` 包裹结果
+  - 同一个作用域的JSX 变量延时赋值没有意义。详见：https://github.com/NervJS/taro/issues/550
+  - 不行使用 for 循环操作 JSX 元素，详情：https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/manipulate-jsx-as-array.md')
   - 同一个库不可以被 import超过一次 
   - StyleSheet 不要重命名/ 使用StyleSheet创建样式，请保持StyleSheet.create格式
 
