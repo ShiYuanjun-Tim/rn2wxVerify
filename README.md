@@ -99,3 +99,7 @@ npm link the-path-to-@tarojs/taro-weapp
                添加单位目前是px单位可修改
               flexDirection检测添加display:flex做兼容
 4. [x] GAI:4 StyleSheet.create 被删除以保留纯粹的object作为样式
+
+- componet
+1. GAI:5  检测 Text/Button的onPress方法 ，转化成bindtap
+2. GAI:6 import的rn组件中一部分需要替换掉比如Touchable.* 全部用view替换, 并且修改onPresss到bindtap
