@@ -67,8 +67,8 @@ npm link the-path-to-@tarojs/taro-weapp
     - **请不要对 this.props.children 进行任何操作**
       this.props.children[0] 在 Taro 中都是非法的
 
-    - **不能把 this.props.children 分解为变量再使用**
-      你必须显性地把 this.props.children 全部都写完整才能实现它的功能, 不能先xx=this.props 之后用{xx.children}的形式使用
+    - **不要把 this.props.children 分解为变量再使用**
+      你必须显性地把 this.props.children 全部都写完整才能实现它的功能, 不要先xx=this.props 之后用{xx.children}的形式使用
 
 3. `不支持` 纯函数当做组件, 替代：可以使用一般组件写法定义
    **并且JSX元素不能出现在render方法之外的地方**
@@ -78,7 +78,10 @@ npm link the-path-to-@tarojs/taro-weapp
     所有组合都必须用 `render` 开头，且遵守驼峰式命名法。和我们的事件规范以 on 开头一样，组件组合使用 `render` 开头。
     组合只能传入单个 JSX 元素，不能传入其它任何类型。当你需要进行一些条件判断或复杂逻辑操作的时候，可以使用一个 Block 元素包裹住，然后在 Block 元素的里面填充其它复杂的逻辑。
 
-5. Rn中的组件和wx组件差异
+5. Rn中的组件和wx组件差异  （以RNapi为主还是以wx的为主这个需要考虑）
+   - 补充RN缺失的Button组件 ,以wx的api为主 GAI:5 把onPress改为bindtap
+   - Touchable.* 在编译成View GAI:6
+   - Image的source转化为src
 
 > #####  **路由/页面跳转**
 
@@ -103,3 +106,8 @@ npm link the-path-to-@tarojs/taro-weapp
 - componet
 1. GAI:5  检测 Text/Button的onPress方法 ，转化成bindtap
 2. GAI:6 import的rn组件中一部分需要替换掉比如Touchable.* 全部用view替换, 并且修改onPresss到bindtap
+3. GAI:7 图片转换把source转化为src, 转化如下格式
+    - {{uri:"xxx}}
+    - {obj}
+    - {obj.xxx}
+    - {require(xxxx)}   本地图片base64编码

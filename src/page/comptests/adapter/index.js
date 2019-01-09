@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import {  View ,Text, TouchableOpacity, ScrollView} from 'react-native';
+import {  View ,Text, TouchableOpacity, ScrollView, Image} from 'react-native';
 import {Button} from "../../../compAdapter"
 import {_alert} from "../../utils"
  
@@ -18,10 +18,10 @@ export default class Page extends Component {
     _alert("onPress")
   }
  
-
+  xx={uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"}
   render() {
- 
-     return (
+    const uriObj = {uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"};
+      return (
        <View style={{flex:1,justifyContent:'center', alignItems:"center",display: "flex", flexDirection: "column" }}>
         
         <Button
@@ -99,10 +99,26 @@ export default class Page extends Component {
           primary plain button
         </Button>
         <Text> ################ </Text>
-        <Text onPress={this.onPress}> click me </Text>
+        <Text onPress={this.onPress}> click Text </Text>
         <TouchableOpacity onPress={this.onPress}>
-          <View><Text>click me </Text></View>
+          <View><Text>click Touchable </Text></View>
         </TouchableOpacity>
+        
+        <TouchableOpacity onPress={this.onPress}>
+          <Image source={{uri:"https://ms.1qianbao.com/v5/images/2017/9/11505879997594.jpg"}} 
+          style={{width: 66, height: 58}}></Image>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.onPress}>
+          <Image source={require('../../../../assets/pic1533634910480.png')} 
+          style={{width: 66, height: 58}}></Image>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.onPress}>
+          <Image source={this.xx}
+          style={{width: 66, height: 58}}></Image>
+        </TouchableOpacity>
+
       </View>
      );
   }
