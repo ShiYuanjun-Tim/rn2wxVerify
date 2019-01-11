@@ -2,7 +2,7 @@ import React ,{Component} from 'react';
 import {  View ,Text, TouchableOpacity, ScrollView, Image} from 'react-native';
 import {Button} from "../../../compAdapter"
 import {_alert} from "../../utils"
- 
+
 export default class Page extends Component {
 
   constructor(props) {
@@ -21,6 +21,8 @@ export default class Page extends Component {
   xx={uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"}
   render() {
     const uriObj = {uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"};
+    const a = {d:"strech"}
+    const mode = a.d
       return (
        <View style={{flex:1,justifyContent:'center', alignItems:"center",display: "flex", flexDirection: "column" }}>
         
@@ -115,10 +117,14 @@ export default class Page extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.onPress}>
-          <Image source={this.xx}
-          style={{width: 66, height: 58}}></Image>
+          <Image source={this.xx} resizeMode={mode}
+          style={{width: 100, height: 200}}></Image>
         </TouchableOpacity>
-
+        
+        <TouchableOpacity onPress={this.onPress}>
+          <Image source={this.xx} resizeMode={mode}
+          style={{width: 100, height: 200}}></Image>
+        </TouchableOpacity>
       </View>
      );
   }

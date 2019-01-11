@@ -2,7 +2,7 @@
 配合[taro-rn2wx分支代码](https://github.com/ShiYuanjun-Tim/taro) 做转化测试
 
 > ###  **Prerequest**
-安装依赖时node版本不能太高推荐8以上10一下
+安装依赖时node版本不能太高  node v7.8.0 (npm v5.7.1) 可以
 
 #### npm包依赖 
 ```
@@ -78,7 +78,12 @@ npm link the-path-to-@tarojs/taro-weapp
     所有组合都必须用 `render` 开头，且遵守驼峰式命名法。和我们的事件规范以 on 开头一样，组件组合使用 `render` 开头。
     组合只能传入单个 JSX 元素，不能传入其它任何类型。当你需要进行一些条件判断或复杂逻辑操作的时候，可以使用一个 Block 元素包裹住，然后在 Block 元素的里面填充其它复杂的逻辑。
 
-5. Rn中的组件和wx组件差异  （以RNapi为主还是以wx的为主这个需要考虑）
+5. Rn中的组件和wx组件差异  
+  有3中方式来实现
+  1. 如果rn没有但是wx有 ：推荐 用RN实现wx组件接口 - 以wxapi为主 （button）
+  2. 如果rn有 wx没有 ： 需要提供patch保证wx端的不报错/ 或者编译成wx组件（Touchable*）
+  3. rn有wx也有但是接口不一样 ： 可以用方法1 以一端接口为主/ 或者用编译方式更改源码
+
    - 补充RN缺失的Button组件 ,以wx的api为主 GAI:5 把onPress改为bindtap
    - Touchable.* 在编译成View GAI:6
    - Image的source转化为src
@@ -111,3 +116,4 @@ npm link the-path-to-@tarojs/taro-weapp
     - {obj}
     - {obj.xxx}
     - {require(xxxx)}   本地图片base64编码
+4. GAI:8 图片的resizemode转换
