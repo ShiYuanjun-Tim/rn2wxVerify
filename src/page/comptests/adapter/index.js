@@ -21,7 +21,7 @@ export default class Page extends Component {
   xx={uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"}
   render() {
     const uriObj = {uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"};
-    const a = {d:"strech"}
+    const a = {d:"stretch"}
     const mode = a.d
       return (
        <View style={{flex:1,justifyContent:'center', alignItems:"center",display: "flex", flexDirection: "column" }}>

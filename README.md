@@ -2,7 +2,7 @@
 配合[taro-rn2wx分支代码](https://github.com/ShiYuanjun-Tim/taro) 做转化测试
 
 > ###  **Prerequest**
-安装依赖时node版本不能太高  node v7.8.0 (npm v5.7.1) 可以
+安装依赖时node版本不能太高推荐 >8.0 <10.0 /  npm >5.7 <6.0  测试nodev8.15.0 (npm v5.10.0) 可以
 
 #### npm包依赖 
 ```
@@ -12,6 +12,7 @@ npm install babel-plugin-transform-decorators-legacy --save-dev
 <!-- use npm link to install the followings packages in rn2wx branched  -->
 npm link the-path-to-@tarojs/plugin-babel
 npm link the-path-to-@tarojs/taro-weapp
+npm link the-path-to-@tarojs/taro
 ```
 #### config file
 1. config folder with config
