@@ -118,3 +118,6 @@ npm link the-path-to-@tarojs/taro
     - {obj.xxx}
     - {require(xxxx)}   本地图片base64编码
 4. GAI:8 图片的resizemode转换
+5. GAI:9 scrollView的RN到微信转化
+
+TODO: 本地图片都需要做转化， require（）形式都要检测

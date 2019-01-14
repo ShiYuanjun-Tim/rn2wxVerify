@@ -3,7 +3,8 @@ import React , { Component } from 'react';
 // import Page from "./page/testList/List"
 // import Page from "./page/styleTest/index"
 // import Page from "./page/comptests/proptest/index"
-import Page from "./page/comptests/adapter/index"
+// import Page from "./page/comptests/adapter/clickable"
+import Page from "./page/comptests/adapter/scrollview"
 export default class App extends Component {
 
   config = {
@@ -11,7 +12,8 @@ export default class App extends Component {
       // 'page/testList/List',
       // "page/styleTest/index",
       // "page/comptests/proptest/index",
-      "page/comptests/adapter/index",
+      // "page/comptests/adapter/clickable",
+      "page/comptests/adapter/scrollview",
     ],
     window: {
       backgroundTextStyle: 'light',
