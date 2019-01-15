@@ -25,18 +25,18 @@ export default class Page extends Component {
         <Text>1 sigle inline style [ok]</Text>
         <Text style={{fontSize: 20, color:"red"}}>check the font and color</Text>
 
-        <Text>2 flex layout compare column [half] </Text>
-        <View style={{height: 100  ,display:"flex" }}>
-          <View style={{flex:1, height: 50,width: 50 ,backgroundColor:"red"}}></View>
+        <Text>2 flex layout compare column [ok] </Text>
+        <View style={{ height:100 }} flexContainer>
+          <View style={{flex:1 ,backgroundColor:"red"}}></View>
           <View style={{flex:2, height: 40,width: 40 ,backgroundColor:"blue"}}></View>
           <View style={{flex:1,height: 30,width: 30 , backgroundColor:"green"}}></View>
         </View>
 
-        <Text>3 flex layout compare row [half] </Text>
-        <View style={{height: 100 ,flexDirection:"row" }}>
+        <Text>3 flex layout compare row [ok] </Text>
+        <View style={{height:100 ,flexDirection:"row" }} flexContainer >
           <View style={{flex:1,height: 30,width: 30 , backgroundColor:"blue"}}></View>
-          <View style={{flex:2,height: 30,width: 30 , backgroundColor:"red"}}></View>
-          <View style={{flex:1,height: 30,width: 30 , backgroundColor:"green"}}></View>
+          <View style={{flex:2 , backgroundColor:"red"}}></View>
+          <View style={{flex:1,height: 50,width: 30 , backgroundColor:"green"}}></View>
         </View>
 
         <Text> 4 array style [ok] </Text>

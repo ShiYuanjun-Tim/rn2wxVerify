@@ -41,6 +41,7 @@ npm link the-path-to-@tarojs/taro
   - [x] **不打算支持 css 文件的导入**  
 
 2. 写法兼容
+**flex 布局容器 需要添加flexContainer 属性标志，方便编译代码打补丁**
 
 | status |  方面   | rn   | wx   |
 |:-------|:---------|:-----|:-----|
@@ -119,5 +120,6 @@ npm link the-path-to-@tarojs/taro
     - {require(xxxx)}   本地图片base64编码
 4. GAI:8 图片的resizemode转换
 5. GAI:9 scrollView的RN到微信转化
+6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { width: '100%', flexDirection: 'column', display: 'flex' }
 
 TODO: 本地图片都需要做转化， require（）形式都要检测
