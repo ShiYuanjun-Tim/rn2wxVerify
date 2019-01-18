@@ -11,7 +11,7 @@ export default class Page extends Component {
   }
 
   config = {
-    navigationBarTitleText: '样式',
+    navigationBarTitleText: '样式测试',
   }
  
 
@@ -23,11 +23,11 @@ export default class Page extends Component {
         <View style={{height: 50}}></View>
        
         <Text>1 sigle inline style [ok]</Text>
-        <Text style={{fontSize: 20, color:"red"}}>check the font and color</Text>
+        <Text style={{fontSize: 20, color:"red"}}>font color should be red</Text>
 
         <Text>2 flex layout compare column [ok] </Text>
         <View style={{ height:100 }} flexContainer>
-          <View style={{flex:1 ,backgroundColor:"red"}}></View>
+          <View style={{flex:2 ,backgroundColor:"red"}}></View>
           <View style={{flex:2, height: 40,width: 40 ,backgroundColor:"blue"}}></View>
           <View style={{flex:1,height: 30,width: 30 , backgroundColor:"green"}}></View>
         </View>
@@ -35,7 +35,7 @@ export default class Page extends Component {
         <Text>3 flex layout compare row [ok] </Text>
         <View style={{height:100 ,flexDirection:"row" }} flexContainer >
           <View style={{flex:1,height: 30,width: 30 , backgroundColor:"blue"}}></View>
-          <View style={{flex:2 , backgroundColor:"red"}}></View>
+          <View style={{flex:1 ,height: 50, backgroundColor:"red"}}></View>
           <View style={{flex:1,height: 50,width: 30 , backgroundColor:"green"}}></View>
         </View>
 

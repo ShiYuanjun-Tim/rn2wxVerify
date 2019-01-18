@@ -1,13 +1,46 @@
 export function _alert(msg) {
   if (process.env.TARO_ENV === 'weapp') {
-    wx.showModal({title:msg})
+    wx.showModal({title:msg||''})
   }else{
-    alert(msg)
+    alert(msg||'')
   }
 }
 
 
+/**
+ * 根据预设置的样式 在build的时候根据配置选择合适样式合并成一个， 合并顺序和初始化顺序有关
+ * 用于模拟css样式的  ‘.classA .classB .classC’时候样式的覆盖行为
+ * 
+const builder = new StyleBuilder(bthBase) //基础样式 不管build配置这里的样式都会存在
+  .addStyle({    //当addStyle 存在第二参数时意思是有A/B/C3种type的样式集合a/b/c
+    A:a
+    B:b
+    C c
+  }, "type")  
+  .narrowBy({  //narrowBy是用于细化之前样式所用，plain只可以是bool值，来决定是否用同名type值多对应的样式对象来覆盖之前的
+    A:aa       
+    B:bb
+    C cc
+  }, "plain")
+  .addStyle({ //用对象的 disabled:true 值来选取下列的disabledStyleObj样式
+    disabled: disabledStyleObj，
+    classNameA: classStyObj
+    classNameB: classStyObj
+    ...
+  });
 
+
+      disabled = false,
+      plain = true,
+      type = ‘A’,
+ 
+
+   builder.build({
+      type:A, plain:true, disabled:true
+    }) 这里会模拟这样的验格式行为
+      style = Object.assign(bthBase, a, aa , disabledStyleObj)  
+
+ */
 export class StyleBuilder {
 
   constructor(baseStyle = {}) {

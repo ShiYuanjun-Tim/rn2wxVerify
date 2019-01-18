@@ -32,6 +32,7 @@ npm link the-path-to-@tarojs/taro
   - 不行使用 for 循环操作 JSX 元素，详情：https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/manipulate-jsx-as-array.md')
   - 同一个库不可以被 import超过一次 
   - StyleSheet 不要重命名/ 使用StyleSheet创建样式，请保持StyleSheet.create格式
+  - flex布局的容器需要添加flexContainer属性标明方便转码打补丁
 
 > ##### **样式**
 1. 格式  - rn样式写法为主去兼容到wx
@@ -60,7 +61,6 @@ npm link the-path-to-@tarojs/taro
       - [x] 事件handler命名必须 `on`开头
     - 组件
       - [x] 不支持 替代方案是使用*组合组件 5*方式,
-
     - 数据 Ok
     - 命名问题
       -  `on`开头的方法有特殊待遇，这个属性名被被当作事件触发
@@ -107,7 +107,6 @@ npm link the-path-to-@tarojs/taro
 2. [] GAI:2  将react-native的引用删除防止拷贝这些东西到项目中(之后考虑替换自定义库)
 3. [x] GAI:3   style支持RN中array的写法
                添加单位目前是px单位可修改
-              flexDirection检测添加display:flex做兼容
 4. [x] GAI:4 StyleSheet.create 被删除以保留纯粹的object作为样式
 
 - componet
@@ -122,4 +121,6 @@ npm link the-path-to-@tarojs/taro
 5. GAI:9 scrollView的RN到微信转化
 6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { width: '100%', flexDirection: 'column', display: 'flex' }
 
-TODO: 本地图片都需要做转化， require（）形式都要检测
+
+TODO:
+scrollview的method只有RN中是存在的，wx端是没有的需要转码换实现

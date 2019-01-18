@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import {  View ,Text, TouchableOpacity, ScrollView, Image} from 'react-native';
+import {  View ,Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import {Button} from "../../../compAdapter"
 import {_alert} from "../../utils"
 
@@ -10,7 +10,7 @@ export default class Page extends Component {
     
   }
   config = {
-    navigationBarTitleText: '组件适配',
+    navigationBarTitleText: '点击和图片',
   }
 
 
@@ -21,11 +21,13 @@ export default class Page extends Component {
   xx={uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"}
   render() {
     const uriObj = {uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"};
-    const a = {d:"stretch"}
+    const xxx={uri: require('../../../../assets/pic1533634910480.png')}
+    const a = {d:"contain"}
     const mode = a.d
       return (
-       <View style={{flex:1,justifyContent:'center', alignItems:"center",display: "flex", flexDirection: "column" }}>
-        
+       <View flexContainer style={{flex:1,justifyContent:'center', alignItems:"center" }}>
+         {process.env.TARO_ENV === 'weapp' ? null:<View style={{height:50}}></View> }
+
         <Button
           type="default"
           size="default"
@@ -112,7 +114,7 @@ export default class Page extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.onPress}>
-          <Image source={require('../../../../assets/pic1533634910480.png')} 
+          <Image source={xxx.uri}  resizeMode="cover"
           style={{width: 66, height: 58}}></Image>
         </TouchableOpacity>
 
@@ -120,11 +122,7 @@ export default class Page extends Component {
           <Image source={this.xx} resizeMode={mode}
           style={{width: 100, height: 200}}></Image>
         </TouchableOpacity>
-        
-        <TouchableOpacity onPress={this.onPress}>
-          <Image source={this.xx} resizeMode={mode}
-          style={{width: 100, height: 200}}></Image>
-        </TouchableOpacity>
+
       </View>
      );
   }
