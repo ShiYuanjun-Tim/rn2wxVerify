@@ -110,7 +110,7 @@ npm link the-path-to-@tarojs/taro
 4. [x] GAI:4 StyleSheet.create 被删除以保留纯粹的object作为样式
 
 - componet
-1. GAI:5  检测 Text/Button的onPress方法 ，转化成bindtap
+1. GAI:5  检测所有事件方法（onPress, onScroll等） ，转化成wx相应的事件方法 （bindtap， bindScroll）
 2. GAI:6 import的rn组件中一部分需要替换掉比如Touchable.* 全部用view替换, 并且修改onPresss到bindtap
 3. GAI:7 图片转换把source转化为src, 转化如下格式
     - {{uri:"xxx}}
