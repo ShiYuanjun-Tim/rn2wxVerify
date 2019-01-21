@@ -21,6 +21,11 @@ export default class Page extends Component {
   onrnPress=()=>{
     _alert("onPress")
   }
+
+  load(){
+    debugger
+    console.log("load")}
+  fail(){console.log("fail")}
  
   xx={uri:"https://ms.1qianbao.com/v6/images/2018/6/29/21530260266615.jpg"}
   render() {
@@ -114,16 +119,22 @@ export default class Page extends Component {
         
         <TouchableOpacity onPress={this.onrnPress}>
           <Image source={{uri:"https://ms.1qianbao.com/v5/images/2017/9/11505879997594.jpg"}} 
+          onLoad ={this.load}
+          onError = {this.error}
           style={{width: 66, height: 58}}></Image>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.onrnPress}>
           <Image source={xxx.uri}  resizeMode="cover"
+          onLoad ={this.load}
+          onError = {this.error}
           style={{width: 66, height: 58}}></Image>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.onrnPress}>
           <Image source={this.xx} resizeMode={mode}
+          onLoad ={this.load}
+          onError = {this.error}
           style={{width: 100, height: 200}}></Image>
         </TouchableOpacity>
 

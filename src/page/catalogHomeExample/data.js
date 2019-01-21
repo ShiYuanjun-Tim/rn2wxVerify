@@ -55,8 +55,8 @@ export function getParentCatalogList(){
   return fetch(parentCatalogList , {
     method: 'POST',
   }).then(data=>{
-    debugger
+    console.log('done',data)
   }).catch(err=>{
-    debugger
+    console.log('fail',err)
   })
 }

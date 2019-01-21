@@ -120,7 +120,7 @@ npm link the-path-to-@tarojs/taro
 4. GAI:8 图片的resizemode转换
 5. GAI:9 scrollView的RN到微信转化
 6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { width: '100%', flexDirection: 'column', display: 'flex' }
-
+7. GAI:11 scrollview的method scrollTo/scrollToEnd方法的转码实现 ，通过ref的方法注入实现
 
 TODO:
-scrollview的method只有RN中是存在的，wx端是没有的需要转码换实现
+  生成代码重复问题 

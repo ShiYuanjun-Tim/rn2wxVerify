@@ -19,6 +19,10 @@ export default class SimpleComp extends Component {
 
   }
 
+  refCall(){
+    _alert('pop from SimpleComp')
+  }
+
   click = (e) =>{
     this.props.onClick && this.props.onClick()
   }

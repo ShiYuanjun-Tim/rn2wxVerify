@@ -35,14 +35,18 @@ export default class Page extends Component {
 
   }
 
+  call=()=>{
+    this.refs.sc.refCall()
+  }
   render() {
  
      return (
        <View style={{flex:1,justifyContent:'center', alignItems:"center",display: "flex", flexDirection: "column" }}>
           {/* {PureComp()}   */}
           {/* {this.aUIGeneate()} */}
+          <Text onPress={this.call}>call the simpleComp's method from ref.xxx</Text>
           <SimpleComp
-            name="SimpleComp"
+            name="SimpleComp"   ref={'sc'}
             renderPropComp = {<Text>i'm  component passed from Parent</Text>}
             onGetUI = {this.getUI}
             onClick = {this.onPress}

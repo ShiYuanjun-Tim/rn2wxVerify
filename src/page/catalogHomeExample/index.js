@@ -25,8 +25,11 @@ export default class Page extends Component {
   render() {
   
       return (
-       <View style={{flex:1,justifyContent:'center', alignItems:"center",display: "flex", flexDirection: "column" }}>
-         
+       <View flexContainer style={{flex:1,justifyContent:'center', alignItems:"center", flexDirection:'row' }}>
+         <View style={{backgroundColor:'blue'}}>
+
+         </View>
+         <View style={{backgroundColor:'red', flex:}}></View>
       </View>
      );
   }
