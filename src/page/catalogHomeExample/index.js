@@ -13,8 +13,13 @@ export default class Page extends Component {
     navigationBarTitleText: '组件适配',
   }
 
-  componentWillMount(){
-    getParentCatalogList()
+  componentDidMount(){
+    // getParentCatalogList()
+
+    if (process.env.TARO_ENV === 'weapp'){
+      console.log(wx.getSystemInfoSync())
+
+    }
   }
 
   onPress=()=>{
@@ -25,11 +30,24 @@ export default class Page extends Component {
   render() {
   
       return (
-       <View flexContainer style={{flex:1,justifyContent:'center', alignItems:"center", flexDirection:'row' }}>
-         <View style={{backgroundColor:'blue'}}>
-
+       <View flexContainer style={{flex:1,justifyContent:'center', alignItems:"center", flexDirection:'row' , backgroundColor:'green', height:'100%' }}>
+         <View style={{backgroundColor:'blue', flex:1, }}>
+             <Text>left</Text>
+            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
+            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
+ 
+            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
+            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
+            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
+            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
+            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
+            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
+            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
+            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
          </View>
-         <View style={{backgroundColor:'red', flex:}}></View>
+         <View style={{backgroundColor:'red', flex:1}}>
+         <Text>right</Text>
+         </View>
       </View>
      );
   }
