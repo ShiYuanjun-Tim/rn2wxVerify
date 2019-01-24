@@ -107,7 +107,6 @@ npm link the-path-to-@tarojs/taro
 2. [] GAI:2  将react-native的引用删除防止拷贝这些东西到项目中(之后考虑替换自定义库)
 3. [x] GAI:3   style支持RN中array的写法
                添加单位目前是px单位可修改
-4. [x] GAI:4 StyleSheet.create 被删除以保留纯粹的object作为样式
 
 - componet
 1. GAI:5  检测所有事件方法（onPress, onScroll等） ，转化成wx相应的事件方法 （bindtap， bindScroll）
@@ -124,3 +123,6 @@ npm link the-path-to-@tarojs/taro
 
 TODO:
   生成代码重复问题 
+  样式单位px
+  RN导入的模块不要用as改名
+  

@@ -1,6 +1,11 @@
 
 import React ,{Component} from 'react';
-import {  View ,Text, TouchableOpacity, ScrollView, Image} from 'react-native';
+import {  View ,Text, TouchableOpacity, ScrollView, Image , 
+  Dimensions,
+  PixelRatio,
+  Platform,
+   
+} from 'react-native';
 import {getParentCatalogList} from './data'
 
 export default class Page extends Component {
@@ -20,6 +25,14 @@ export default class Page extends Component {
       console.log(wx.getSystemInfoSync())
 
     }
+    console.log(Dimensions.get('window'))
+    console.log(PixelRatio.get())
+    console.log(Platform.OS)
+    console.log(Platform.select({
+        wx:'this.is wx',
+        ios: 'this.is ios'
+    }))
+
   }
 
   onPress=()=>{

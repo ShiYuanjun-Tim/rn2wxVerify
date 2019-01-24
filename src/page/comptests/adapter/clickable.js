@@ -23,7 +23,7 @@ export default class Page extends Component {
   }
 
   load(){
-    debugger
+    
     console.log("load")}
   fail(){console.log("fail")}
  
