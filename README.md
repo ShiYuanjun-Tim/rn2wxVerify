@@ -100,7 +100,6 @@ npm link the-path-to-@tarojs/taro
 1. 微信头bar的配置  =》 this.config
 
 
-
 > ##### modification
 - style 
 1. [x] GAI:1  将react中的Component改成 @tarojs/taro-weapp中的Component
