@@ -1,5 +1,5 @@
 
-import React ,{Component} from 'react';
+import  * as   React from 'react';
 import {  View ,Text, TouchableOpacity, ScrollView, Image , 
   Dimensions,
   PixelRatio,
@@ -8,7 +8,8 @@ import {  View ,Text, TouchableOpacity, ScrollView, Image ,
 } from 'react-native';
 import {getParentCatalogList} from './data'
 
-export default class Page extends Component {
+const {height,width} = Dimensions.get('window')
+export default class Page extends React.Component {
 
   constructor(props) {
     super(props)
@@ -19,7 +20,7 @@ export default class Page extends Component {
   }
 
   componentDidMount(){
-    // getParentCatalogList()
+    getParentCatalogList()
 
     if (process.env.TARO_ENV === 'weapp'){
       console.log(wx.getSystemInfoSync())
@@ -43,24 +44,17 @@ export default class Page extends Component {
   render() {
   
       return (
-       <View flexContainer style={{flex:1,justifyContent:'center', alignItems:"center", flexDirection:'row' , backgroundColor:'green', height:'100%' }}>
-         <View style={{backgroundColor:'blue', flex:1, }}>
-             <Text>left</Text>
-            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
-            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
- 
-            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
-            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
-            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
-            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
-            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
-            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
-            <View style={{backgroundColor:'gold', flex:1, height:200}}></View>   
-            <View style={{backgroundColor:'red', flex:1, height:200}}></View>    
+       <View flexContainer style={{flex:1,justifyContent:'center', alignItems:"center", flexDirection:'row' , backgroundColor:'gold', height }}>
+         <View flexContainer style={{backgroundColor:'blue', width:86 , height:'100%'}}>
+           <ScrollView style={{ flex:1}} contentContainerStyle={{backgroundColor:'green'}}>
+
+           </ScrollView>
          </View>
+
          <View style={{backgroundColor:'red', flex:1}}>
          <Text>right</Text>
          </View>
+
       </View>
      );
   }

@@ -42,7 +42,9 @@ npm link the-path-to-@tarojs/taro
   - [x] **不打算支持 css 文件的导入**  
 
 2. 写法兼容
-**flex 布局容器 需要添加flexContainer 属性标志，方便编译代码打补丁**
+> **flex 布局容器 需要添加flexContainer 属性标志，方便编译代码打补丁**
+> **flex布局时候 flex方向所在的大小必须设置 如果是row方向则容器需要width（默认100%） 如果方向是column则容器需要height**
+> **只有flex容器（wx需要用flexContainer标记）中的flex属性才能如预期效果，flex容器外的独立flex使用可能在rn可行wx不可行**
 
 | status |  方面   | rn   | wx   |
 |:-------|:---------|:-----|:-----|
@@ -106,7 +108,8 @@ npm link the-path-to-@tarojs/taro
 2. [] GAI:2  将react-native的引用删除防止拷贝这些东西到项目中(之后考虑替换自定义库)
 3. [x] GAI:3   style支持RN中array的写法
                添加单位目前是px单位可修改
-
+4. GAI:13 提供全局样式的入口
+ 
 - componet
 1. GAI:5  检测所有事件方法（onPress, onScroll等） ，转化成wx相应的事件方法 （bindtap， bindScroll）
 2. GAI:6 import的rn组件中一部分需要替换掉比如Touchable.* 全部用view替换, 并且修改onPresss到bindtap
@@ -117,7 +120,7 @@ npm link the-path-to-@tarojs/taro
     - {require(xxxx)}   本地图片base64编码
 4. GAI:8 图片的resizemode转换
 5. GAI:9 scrollView的RN到微信转化
-6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { width: '100%', flexDirection: 'column', display: 'flex' }
+6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { flexDirection: 'column', display: 'flex' }
 7. GAI:11 scrollview的method scrollTo/scrollToEnd方法的转码实现 ，通过ref的方法注入实现
 8. GAI:12 新增模块rnapiPatch4wx 主要提供RN组件在wx端的mock实现，并且在导入组件时的替换
 

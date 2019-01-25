@@ -1,4 +1,4 @@
-import React ,{Component} from 'react';
+import * as React   from 'react';
 import { Text, View, ScrollView } from 'react-native';
  
 import {_alert} from "../../utils"

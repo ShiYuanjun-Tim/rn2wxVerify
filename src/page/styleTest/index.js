@@ -1,4 +1,4 @@
-import React ,{Component} from 'react';
+import * as React from 'react';
 import { Text, View,  StyleSheet, ScrollView } from 'react-native';
  
 import {_alert} from "../utils"
@@ -19,17 +19,16 @@ export default class Page extends Component {
  
      return (
              
-      <View style={{flex:1,justifyContent:'center', alignItems:"flex-start",display: "flex", flexDirection: "column" }}>
-        <View style={{height: 50}}></View>
-       
+      <View style={{flex:1,flexDirection: "column", justifyContent:'center' }} flexContainer>
+        
         <Text>1 sigle inline style [ok]</Text>
         <Text style={{fontSize: 20, color:"red"}}>font color should be red</Text>
 
         <Text>2 flex layout compare column [ok] </Text>
-        <View style={{ height:100 }} flexContainer>
+        <View style={{ height:100 , width: 200 }} flexContainer>
           <View style={{flex:2 ,backgroundColor:"red"}}></View>
-          <View style={{flex:2, height: 40,width: 40 ,backgroundColor:"blue"}}></View>
-          <View style={{flex:1,height: 30,width: 30 , backgroundColor:"green"}}></View>
+          <View style={{flex:2,width: 60 ,backgroundColor:"blue"}}></View>
+          <View style={{flex:1, width: 30 , backgroundColor:"green"}}></View>
         </View>
 
         <Text>3 flex layout compare row [ok] </Text>

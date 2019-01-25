@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import * as React  from 'react';
 import {_alert} from "./page/utils"
 
 // import Page from "./page/styleTest/index"
@@ -6,7 +6,7 @@ import {_alert} from "./page/utils"
 // import Page from "./page/comptests/adapter/clickable"
 // import Page from "./page/comptests/adapter/scrollview"
 import Page from "./page/catalogHomeExample"
-export default class App extends Component {
+ export default class App extends React.Component {
 
   config = {
     pages: [

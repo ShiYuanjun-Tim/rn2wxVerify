@@ -1,9 +1,9 @@
-import React ,{Component} from 'react';
+import * as React  from 'react';
 import {  View ,Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import {Button} from "../../../compAdapter"
 import {_alert} from "../../utils"
 
-export default class Page extends Component {
+export default class Page extends React.Component {
 
   constructor(props) {
     super(props)

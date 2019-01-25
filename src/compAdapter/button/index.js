@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React  from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import {StyleBuilder} from "../../page/utils"
 /* 
@@ -16,7 +16,7 @@ const TYPE_DEFAULT = "default"
 const TYPE_PRIMARY = "primary"
 const TYPE_WARN = "warn"
 
-export default class Button extends Component {
+export default class Button extends React.Component {
 
   constructor(props) {
     super(props)
