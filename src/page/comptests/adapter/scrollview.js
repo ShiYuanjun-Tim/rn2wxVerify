@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { _alert } from "../../utils"
 
-export default class Page extends Component {
+export default class Page extends React.Component {
 
   constructor(prop){
     super(prop)

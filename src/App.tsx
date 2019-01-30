@@ -5,7 +5,8 @@ import {_alert} from "./page/utils"
 // import Page from "./page/comptests/proptest/index"
 // import Page from "./page/comptests/adapter/clickable"
 // import Page from "./page/comptests/adapter/scrollview"
-import Page from "./page/catalogHomeExample"
+import Page from "./page/comptests/adapter/template"
+// import Page from "./page/catalogHomeExample"
  export default class App extends React.Component {
 
   config = {
@@ -14,7 +15,8 @@ import Page from "./page/catalogHomeExample"
       // "page/comptests/proptest/index",
       // "page/comptests/adapter/clickable",
       // "page/comptests/adapter/scrollview",
-      "page/catalogHomeExample/index",
+      "page/comptests/adapter/template",
+      // "page/catalogHomeExample/index",
 
     ],
     window: {

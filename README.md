@@ -10,12 +10,14 @@ npm install babel-preset-env --save-dev
 npm install babel-plugin-transform-decorators-legacy --save-dev 
 
 <!-- use npm link to install the followings packages in rn2wx branched  -->
-npm link the-path-to-@tarojs/plugin-babel
+npm link the-path-to-@tarojs/rnapiPatch4wx
+npm link the-path-to-@tarojs/taro-plugin-babel
 npm link the-path-to-@tarojs/taro-weapp
 npm link the-path-to-@tarojs/taro
 ```
 #### config file
 1. config folder with config
+   - 配置项目编译时候需要替换的常量defineConstants和环境变量env
 2. project.config.json for wx
 
 
@@ -123,9 +125,18 @@ npm link the-path-to-@tarojs/taro
 6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { flexDirection: 'column', display: 'flex' }
 7. GAI:11 scrollview的method scrollTo/scrollToEnd方法的转码实现 ，通过ref的方法注入实现
 8. GAI:12 新增模块rnapiPatch4wx 主要提供RN组件在wx端的mock实现，并且在导入组件时的替换
+9. GAI:13  嵌套解析npm依赖时指定不需要解析的路径/不可能用到 ，【理想情况该把导入都remove掉】
 
 TODO:
   生成代码重复问题 
   样式单位px
   RN导入的模块不要用as改名
+!  jsx方法转template 
+  map中点击事件的bind
+  ...obj 不支持
+!   ListView的转化
+!  本地模块alias 支持类似  source/xx.png
+!   Animated
+!  JSX 成员表达式
+!  不解析 平台文件ios android web 
   
