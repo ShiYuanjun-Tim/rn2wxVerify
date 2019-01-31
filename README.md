@@ -126,6 +126,11 @@ npm link the-path-to-@tarojs/taro
 7. GAI:11 scrollview的method scrollTo/scrollToEnd方法的转码实现 ，通过ref的方法注入实现
 8. GAI:12 新增模块rnapiPatch4wx 主要提供RN组件在wx端的mock实现，并且在导入组件时的替换
 9. GAI:13  嵌套解析npm依赖时指定不需要解析的路径/不可能用到 ，【理想情况该把导入都remove掉】
+10. GAI:14 文件解析后后缀   
+    packages/taro-cli/src/util/index.js 配置文件后缀 use in resolveScriptPath
+    exports.JS_EXT = ['.js', '.jsx']
+    exports.TS_EXT = ['.ts', '.tsx']
+
 
 TODO:
   生成代码重复问题 
@@ -135,8 +140,13 @@ TODO:
   map中点击事件的bind
   ...obj 不支持
 !   ListView的转化
-!  本地模块alias 支持类似  source/xx.png
 !   Animated
 !  JSX 成员表达式
-!  不解析 平台文件ios android web 
-  
+!  不解析 平台文件ios android web
+!  window.Map 形似不合法只能用Map
+！ eflow接入
+ DONE:
+    本地模块alias 支持类似  source/xx.png (看config文件配置) 
+
+
+

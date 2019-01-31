@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { _alert } from "../../utils"
 
+import Comp from './iosComp'
 export default class Page extends React.Component {
 
   constructor(prop) {
@@ -11,17 +12,17 @@ export default class Page extends React.Component {
     }
   }
 
-  switch1(aplpha) {
-    switch (aplpha) {
-      case "a": {
+  // switch1(aplpha) {
+  //   switch (aplpha) {
+  //     case "a": {
 
-        return <View><Text> switch a</Text></View>
-      }
-      case "b": {
-        return <View><Text>switch b</Text></View>
-      }
-    }
-  }
+  //       return <View><Text> switch a</Text></View>
+  //     }
+  //     case "b": {
+  //       return <View><Text>switch b</Text></View>
+  //     }
+  //   }
+  // }
 
 
 
@@ -40,7 +41,7 @@ export default class Page extends React.Component {
       {
         view
       }
-
+      <Comp></Comp>
     </View >
   }
 }
