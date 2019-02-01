@@ -5,7 +5,8 @@ import {_alert} from "./page/utils"
 // import Page from "./page/comptests/proptest/index"
 // import Page from "./page/comptests/adapter/clickable"
 // import Page from "./page/comptests/adapter/scrollview"
-import Page from "./page/comptests/adapter/template"
+// import Page from "./page/comptests/adapter/template"
+import Page from "./page/eflow/index"
 // import Page from "./page/catalogHomeExample"
  export default class App extends React.Component {
 
@@ -15,7 +16,8 @@ import Page from "./page/comptests/adapter/template"
       // "page/comptests/proptest/index",
       // "page/comptests/adapter/clickable",
       // "page/comptests/adapter/scrollview",
-      "page/comptests/adapter/template",
+      // "page/comptests/adapter/template",
+      "page/eflow/index",
       // "page/catalogHomeExample/index",
 
     ],
@@ -29,7 +31,7 @@ import Page from "./page/comptests/adapter/template"
 
   render() {
     return (
-      <Page/>
+      <Page where="from app"/>
     );
   }
 }

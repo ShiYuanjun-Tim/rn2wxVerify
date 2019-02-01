@@ -37,7 +37,7 @@ export default class SimpleComp extends Component {
   render () {
      return <View style={{display: "flex", flexDirection: "column"}}>
       <Text>1 [ok]-->数据属性</Text>
-      <Text>Hello, {this.props.name}</Text>
+      <Text>Hello, {this.props.name} {this.props.age}</Text>
       <Text>2 [ok]-->事件属性(非onXXX) `onClick`</Text>
       <Text onPress={this.props.onClick}>Click me [props.onClick]</Text>
       <Text onPress={this.click}>Click me [this.click]</Text>

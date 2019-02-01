@@ -10,10 +10,10 @@ npm install babel-preset-env --save-dev
 npm install babel-plugin-transform-decorators-legacy --save-dev 
 
 <!-- use npm link to install the followings packages in rn2wx branched  -->
-npm link the-path-to-@tarojs/rnapiPatch4wx
-npm link the-path-to-@tarojs/taro-plugin-babel
-npm link the-path-to-@tarojs/taro-weapp
-npm link the-path-to-@tarojs/taro
+npm link /Users/syj/WS/rn2wx/packages/taro
+npm link /Users/syj/WS/rn2wx/packages/rnapiPatch4wx
+npm link /Users/syj/WS/rn2wx/packages/taro-weapp
+npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 ```
 #### config file
 1. config folder with config
@@ -23,7 +23,7 @@ npm link the-path-to-@tarojs/taro
 
 #### 构建项目
 1. taro-transformer-wx 需要tsc编译出lib文件夹
-2. taro改动需要build taro-weapp
+2. taro / taro-weapp 改动需都要build taro-weapp
  
 > ###  **Test Point**
 #### 特性测试
@@ -68,7 +68,14 @@ npm link the-path-to-@tarojs/taro
     - 数据 Ok
     - 命名问题
       -  `on`开头的方法有特殊待遇，这个属性名被被当作事件触发
-        
+    - **配置为页面的组件其参数无法通过标签上的属性来传递 只能url或者数据管理类**
+    - >  疑难排查
+      - 为什么无法属性传递下去 组件中拿不到
+        1. 属性名字是否是on开头了 类似 onestr 之类的
+        2. 改组件是不是事实上是一个页面（配置在App的config.pages中）
+
+
+
 2. children的使用
     - **请不要对 this.props.children 进行任何操作**
       this.props.children[0] 在 Taro 中都是非法的
@@ -126,7 +133,7 @@ npm link the-path-to-@tarojs/taro
 7. GAI:11 scrollview的method scrollTo/scrollToEnd方法的转码实现 ，通过ref的方法注入实现
 8. GAI:12 新增模块rnapiPatch4wx 主要提供RN组件在wx端的mock实现，并且在导入组件时的替换
 9. GAI:13  嵌套解析npm依赖时指定不需要解析的路径/不可能用到 ，【理想情况该把导入都remove掉】
-10. GAI:14 文件解析后后缀   
+10. GAI:14 文件解析后后缀   本地文件也是优先使用带平台的代码
     packages/taro-cli/src/util/index.js 配置文件后缀 use in resolveScriptPath
     exports.JS_EXT = ['.js', '.jsx']
     exports.TS_EXT = ['.ts', '.tsx']

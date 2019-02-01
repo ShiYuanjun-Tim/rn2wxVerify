@@ -3,7 +3,6 @@ import { Text, View, ScrollView } from 'react-native';
  
 import {_alert} from "../../utils"
 import SimpleComp from "../../../comps/SimpleComp"
-// import PureComp from "../../../comps/PureComp"
 /* 
 不能使用
 
@@ -11,11 +10,13 @@ function PureComp(){
   return <Text> i'm PureComps</Text> 
 } */
 
-export default class Page extends Component {
+export default class Page extends React.Component {
 
   constructor(props) {
     super(props)
-    
+    this.state= {
+        age:18
+    }
   }
   config = {
     navigationBarTitleText: '组件测试',
@@ -44,9 +45,12 @@ export default class Page extends Component {
        <View style={{flex:1,justifyContent:'center', alignItems:"center",display: "flex", flexDirection: "column" }}>
           {/* {PureComp()}   */}
           {/* {this.aUIGeneate()} */}
-          <Text onPress={this.call}>call the simpleComp's method from ref.xxx</Text>
+          <Text>i'm page ,the 'where' prop from parent won't comes : {this.props.where}</Text>
+         <Text onPress={this.call}>call the simpleComp's method from ref.xxx</Text>
           <SimpleComp
-            name="SimpleComp"   ref={'sc'}
+            name="SimpleComp"  
+            age ={this.state.age}
+             ref={'sc'}
             renderPropComp = {<Text>i'm  component passed from Parent</Text>}
             onGetUI = {this.getUI}
             onClick = {this.onPress}
