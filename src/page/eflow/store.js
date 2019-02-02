@@ -8,7 +8,8 @@ class AA extends Store {
     super(options);
     this.initState({
       astring:'init string',
-      obj:{'empty':'obj'}
+      obj:{'empty':'obj'},
+      arr:[]
     });
   }
   @stateKey("astring")
@@ -24,7 +25,15 @@ class AA extends Store {
 		const dispatch = this.dispatch;
 	 
 			dispatch({newKey:'newVal'})
-      
+
+  }
+
+  @stateKey("arr")
+  arrFun() {
+		const dispatch = this.dispatch;
+	 
+			dispatch([1,2,3])
+
   }
 
 }

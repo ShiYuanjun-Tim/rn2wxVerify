@@ -137,6 +137,7 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
     packages/taro-cli/src/util/index.js 配置文件后缀 use in resolveScriptPath
     exports.JS_EXT = ['.js', '.jsx']
     exports.TS_EXT = ['.ts', '.tsx']
+11. GAI:15 eflow wrap的替换
 
 
 TODO:
@@ -151,7 +152,7 @@ TODO:
 !  JSX 成员表达式
 !  不解析 平台文件ios android web
 !  window.Map 形似不合法只能用Map
-！ eflow接入
+！ eflow接入  window都要去掉
  DONE:
     本地模块alias 支持类似  source/xx.png (看config文件配置) 
 
