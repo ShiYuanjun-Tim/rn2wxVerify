@@ -31,8 +31,8 @@ class AA extends Store {
   @stateKey("arr")
   arrFun() {
 		const dispatch = this.dispatch;
-	 
-			dispatch([1,2,3])
+	 const data = this.data()
+			dispatch([...data,data.length])
 
   }
 
