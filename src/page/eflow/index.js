@@ -9,7 +9,7 @@ import OneProp from '../../comps/ShowOneProp'
 
 class Page extends React.Component {
 
-    defaultProps ={
+  static  defaultProps ={
       where:"no where"
     }
   constructor(prop) {
@@ -20,7 +20,12 @@ class Page extends React.Component {
   }
 
   componentWillMount(){
-    console.log('componentWillMount')
+    console.log('componentWillMount page', this.props.obj)
+  }
+
+  componentDidMount(){
+    console.log('componentDidMount page', this.props.obj)
+
   }
 
   change = ()=>{
@@ -36,7 +41,7 @@ class Page extends React.Component {
     const wh = this.props.where
     const astr = this.props.astring
     return <View style={{ flex: 1, paddingTop: 40 }}>
-      <OneProp /> 
+      <OneProp name={this.props.arr.join("-")}/> 
       <View><Text onPress={this.changeStr}>eflow test , click to change astring</Text></View>
       <View><Text onPress={this.change}>eflow test , click to change obj</Text></View>
       <View><Text onPress={this.changeArr}>eflow test , click to change arr</Text></View>

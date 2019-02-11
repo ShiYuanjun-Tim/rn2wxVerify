@@ -47,6 +47,7 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 > **flex 布局容器 需要添加flexContainer 属性标志，方便编译代码打补丁**
 > **flex布局时候 flex方向所在的大小必须设置 如果是row方向则容器需要width（默认100%） 如果方向是column则容器需要height**
 > **只有flex容器（wx需要用flexContainer标记）中的flex属性才能如预期效果，flex容器外的独立flex使用可能在rn可行wx不可行**
+> 不要使用window这个东西
 
 | status |  方面   | rn   | wx   |
 |:-------|:---------|:-----|:-----|
@@ -152,9 +153,9 @@ TODO:
 !  JSX 成员表达式
 !  不解析 平台文件ios android web
 !  window.Map 形似不合法只能用Map
-！ eflow接入  window都要去掉
+! onLayout 事件
  DONE:
     本地模块alias 支持类似  source/xx.png (看config文件配置) 
-
+    eflow接入  window都要去掉
 
 
