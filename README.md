@@ -1,3 +1,12 @@
+
+
+  ListView的转化
+  onLayout 事件
+  Animated
+  JSX 成员表达式
+  icon
+  
+
 ## 测试RN2WX转换特性的项目
 配合[taro-rn2wx分支代码](https://github.com/ShiYuanjun-Tim/taro) 做转化测试
 
@@ -29,6 +38,7 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 #### 代码改动后的构建项目
 1. taro-transformer-wx 需要tsc编译出lib文件夹
 2. taro 和 taro-weapp 改动需都要重新build 建议根目录下运行 npm run tarochange
+
 ####  lib改动
 1 eflow 所有的window.Set/Map 之类的对象需要删除掉window
 2  6.X 版本的  babel-traverse/lib/scope/renamer.rename() line91 方法中
@@ -46,29 +56,33 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 ```
 
 #### 主要改动的项目有
-packages/taro
-packages/taro-cli
-packages/rnapiPatch4wx  【新】集中存放rn转译译wx用的补丁
-packages/taro-transformer-wx
+
+- packages/taro
+- packages/taro-cli
+- packages/rnapiPatch4wx  【新】集中存放rn转译译wx用的补丁
+- packages/taro-transformer-wx
 
 
 > ###  **Test Point**
+
 #### 特性测试
 
 > ##### **语法**
-  - 含有 JSX 的 switch case 语句必须每种情况都用花括号 `{}` 包裹结果
-  - 同一个作用域的JSX 变量延时赋值没有意义。详见：https://github.com/NervJS/taro/issues/550
-  - 不行使用 for 循环操作 JSX 元素，详情：https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/manipulate-jsx-as-array.md')
-  - 同一个库不可以被 import超过一次 
-  - StyleSheet 不要重命名/ 使用StyleSheet创建样式，请保持StyleSheet.create格式
-  - flex布局的容器需要添加flexContainer属性标明方便转码打补丁
+
+- 含有 JSX 的 switch case 语句必须每种情况都用花括号 `{}` 包裹结果
+- 同一个作用域的JSX 变量延时赋值没有意义。详见：https://github.com/NervJS/taro/issues/550
+- 不行使用 for 循环操作 JSX 元素，详情：https://github.com/NervJS/taro/blob/master/packages/eslint-plugin-taro/docs/manipulate-jsx-as-array.md')
+- 同一个库不可以被 import超过一次 
+- StyleSheet 不要重命名/ 使用StyleSheet创建样式，请保持StyleSheet.create格式
+- flex布局的容器需要添加flexContainer属性标明方便转码打补丁
 
 > ##### **样式**
+
 1. 格式  - rn样式写法为主去兼容到wx
-  - [x] inline style
-  - [x] style array
-  - [x] StyleSheet object
-  - [x] **不打算支持 css 文件的导入**  
+  -  inline style
+  -  style array
+  -  StyleSheet object
+  -  **不打算支持 css 文件的导入**  
 
 | status |  方面   | rn   | wx   |
 |:-------|:---------|:-----|:-----|
@@ -82,11 +96,11 @@ packages/taro-transformer-wx
 
 1. 属性传递
     - 方法/回调
-      - [x] 事件方法绑定的必须是`arrow function`的形式定义的class的方法，否则this指向错误
-      - [ ] 事件通过 wx的 customeEvent的形式触发的，所以父组件传递下去的方法事实上是不会有任何返回的，所以**不可以通过传递方法给子组件使用来使得自组件获取父组件中定义的任何内容，eg. ListView的renderRow的这种用法**
-      - [x] 事件handler命名必须 `on`开头
+      -  事件方法绑定的必须是`arrow function`的形式定义的class的方法，否则this指向错误
+      -  事件通过 wx的 customeEvent的形式触发的，所以父组件传递下去的方法事实上是不会有任何返回的，所以**不可以通过传递方法给子组件使用来使得自组件获取父组件中定义的任何内容，eg. ListView的renderRow的这种用法**
+      -  事件handler命名必须 `on`开头
     - 组件
-      - [x] 不支持 替代方案是使用*组合组件 5*方式,
+      -  不支持 替代方案是使用*组合组件 5*方式,
     - 数据 Ok
     - 命名问题
       -  `on`开头的方法有特殊待遇，这个属性名被被当作事件触发
@@ -129,15 +143,16 @@ packages/taro-transformer-wx
 > #####  **平台判断**
 
 > #####  **其他兼容wx的点**
+
 1. 微信头bar的配置  =》 this.config
 
 
 > ##### 源码改动点 modification
 
 - style 
-1. [x] GAI:1  将react中的Component改成 @tarojs/taro-weapp中的Component
-2. [] GAI:2  将react-native的引用删除防止拷贝这些东西到项目中(之后考虑替换自定义库)
-3. [x] GAI:3   style支持RN中array的写法
+1.  GAI:1  将react中的Component改成 @tarojs/taro-weapp中的Component
+2.  GAI:2  将react-native的引用删除防止拷贝这些东西到项目中(之后考虑替换自定义库)
+3.  GAI:3   style支持RN中array的写法
                添加单位目前是px单位可修改
 4. GAI:13 提供全局样式的入口
  
@@ -164,6 +179,7 @@ packages/taro-transformer-wx
 
 
 > ##### RN代码兼容写法
+
 - **flex 布局容器 需要添加flexContainer 属性标志，方便编译代码打补丁**
 - **flex布局时候 flex方向所在的大小必须设置 如果是row方向则容器需要width（默认100%） 如果方向是column则容器需要height**
 - **只有flex容器（wx需要用flexContainer标记）中的flex属性才能如预期效果，flex容器外的独立flex使用可能在rn可行wx不可行**
@@ -174,11 +190,3 @@ packages/taro-transformer-wx
 - RN导入的模块不要用as改名
 
 
-TODO:
-
-  ListView的转化
-  onLayout 事件
-  Animated
-  JSX 成员表达式
-  icon
-  
