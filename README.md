@@ -2,7 +2,8 @@
 配合[taro-rn2wx分支代码](https://github.com/ShiYuanjun-Tim/taro) 做转化测试
 
 > ###  **Prerequest**
-安装依赖时node版本不能太高推荐 >8.0 <10.0 /  npm >5.7 <6.0  测试nodev8.15.0 (npm v5.10.0) 可以
+安装依赖时node版本不能太高推荐 >8.0 && <10.0 /  npm >5.7 && <6.0  测试nodev8.15.0 (npm v5.10.0) 可以
+babel版本使用 6.X 不要使用7
 
 #### npm包依赖 
 ```
@@ -10,21 +11,47 @@ npm install babel-preset-env --save-dev
 npm install babel-plugin-transform-decorators-legacy --save-dev 
 
 <!-- use npm link to install the followings packages in rn2wx branched  -->
+npm link path/to/the/module
+
 npm link /Users/syj/WS/rn2wx/packages/taro
 npm link /Users/syj/WS/rn2wx/packages/rnapiPatch4wx
 npm link /Users/syj/WS/rn2wx/packages/taro-weapp
 npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 ```
-#### config file
-1. config folder with config
+#### 配置文件
+1. 根目录下的config文件夹 需要taro的配置，用于配置代码转译行为：
    - 配置项目编译时候需要替换的常量defineConstants和环境变量env
-2. project.config.json for wx
+   - 定义本地模块别名alias 类似webpack的alias和tsconfig中的paths属性
+   - 需要额外拷贝的文件（拷贝到微信的编译目的目录中）
+2. project.config.json 微信使用的配置定义源码根目录文件夹等
 
 
-#### 构建项目
+#### 代码改动后的构建项目
 1. taro-transformer-wx 需要tsc编译出lib文件夹
-2. taro / taro-weapp 改动需都要build taro-weapp
- 
+2. taro 和 taro-weapp 改动需都要重新build 建议根目录下运行 npm run tarochange
+####  lib改动
+1 eflow 所有的window.Set/Map 之类的对象需要删除掉window
+2  6.X 版本的  babel-traverse/lib/scope/renamer.rename() line91 方法中
+```javascript
+    var parentDeclar = path.find(function (path) {
+      return path.isDeclaration() || path.isFunctionExpression()||  path.isClassExpression();
+    });
+    if (parentDeclar) {
+      const bindingIds = parentDeclar.getOuterBindingIdentifiers();
+
+      if (bindingIds[oldName] === binding.identifier) {
+         this.maybeConvertFromExportDeclaration(parentDeclar);
+      }
+    }
+```
+
+#### 主要改动的项目有
+packages/taro
+packages/taro-cli
+packages/rnapiPatch4wx  【新】集中存放rn转译译wx用的补丁
+packages/taro-transformer-wx
+
+
 > ###  **Test Point**
 #### 特性测试
 
@@ -42,12 +69,6 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
   - [x] style array
   - [x] StyleSheet object
   - [x] **不打算支持 css 文件的导入**  
-
-2. 写法兼容
-> **flex 布局容器 需要添加flexContainer 属性标志，方便编译代码打补丁**
-> **flex布局时候 flex方向所在的大小必须设置 如果是row方向则容器需要width（默认100%） 如果方向是column则容器需要height**
-> **只有flex容器（wx需要用flexContainer标记）中的flex属性才能如预期效果，flex容器外的独立flex使用可能在rn可行wx不可行**
-> 不要使用window这个东西
 
 | status |  方面   | rn   | wx   |
 |:-------|:---------|:-----|:-----|
@@ -85,8 +106,7 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
       你必须显性地把 this.props.children 全部都写完整才能实现它的功能, 不要先xx=this.props 之后用{xx.children}的形式使用
 
 3. `不支持` 纯函数当做组件, 替代：可以使用一般组件写法定义
-   **并且JSX元素不能出现在render方法之外的地方**
-   
+    
 4. 组件的组合
     组件的组合需要遵守 this.props.children 的所有规则。组合这个功能和 this.props.children 一样是通过 slot 实现的，也就是说 this.props.children 的限制对于组件组合也都同样适用。
     所有组合都必须用 `render` 开头，且遵守驼峰式命名法。和我们的事件规范以 on 开头一样，组件组合使用 `render` 开头。
@@ -112,7 +132,8 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 1. 微信头bar的配置  =》 this.config
 
 
-> ##### modification
+> ##### 源码改动点 modification
+
 - style 
 1. [x] GAI:1  将react中的Component改成 @tarojs/taro-weapp中的Component
 2. [] GAI:2  将react-native的引用删除防止拷贝这些东西到项目中(之后考虑替换自定义库)
@@ -130,32 +151,34 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
     - {require(xxxx)}   本地图片base64编码
 4. GAI:8 图片的resizemode转换
 5. GAI:9 scrollView的RN到微信转化
-6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { flexDirection: 'column', display: 'flex' }
+6. GAI:10 flex容器添加flexContainer属性， 用于补充wx平台的样式， 该属性会使得样式前面插入样式补丁： { flexDirection: 'column', display: 'flex' }    ,  默认如果样式中出现容器类属性 flexConatinerProps= ['flexDirection', 'justifyContent' , 'alignItems'] 则自动给属性中插入 display: 'flex'
 7. GAI:11 scrollview的method scrollTo/scrollToEnd方法的转码实现 ，通过ref的方法注入实现
 8. GAI:12 新增模块rnapiPatch4wx 主要提供RN组件在wx端的mock实现，并且在导入组件时的替换
 9. GAI:13  嵌套解析npm依赖时指定不需要解析的路径/不可能用到 ，【理想情况该把导入都remove掉】
-10. GAI:14 文件解析后后缀   本地文件也是优先使用带平台的代码
+10. GAI:14 文件解析后后缀, 本地文件也是优先使用带平台的代码: 比如require('./a') 会尝试a.wx.js a.js,不解析 平台文件ios android web
     packages/taro-cli/src/util/index.js 配置文件后缀 use in resolveScriptPath
     exports.JS_EXT = ['.js', '.jsx']
     exports.TS_EXT = ['.ts', '.tsx']
 11. GAI:15 eflow wrap的替换
+12. GAI:16 jsx方法的支持  采用eject方式/不采用template方式
+
+
+> ##### RN代码兼容写法
+- **flex 布局容器 需要添加flexContainer 属性标志，方便编译代码打补丁**
+- **flex布局时候 flex方向所在的大小必须设置 如果是row方向则容器需要width（默认100%） 如果方向是column则容器需要height**
+- **只有flex容器（wx需要用flexContainer标记）中的flex属性才能如预期效果，flex容器外的独立flex使用可能在rn可行wx不可行**
+- 含有绝对定位元素的的容器本身必须是非static（默认）定位
+- 不要使用window这个东西
+- 组件属性传递无法使用对象结构写法  类似 <Comp {...someObj}/>
+- render尽量不要有多出口 最好先把null提前处理不要把返回的逻辑包在条件中
+- RN导入的模块不要用as改名
 
 
 TODO:
-  生成代码重复问题 
-  样式单位px
-  RN导入的模块不要用as改名
-!  jsx方法转template 
-  map中点击事件的bind
-  ...obj 不支持
-!   ListView的转化
-!   Animated
-!  JSX 成员表达式
-!  不解析 平台文件ios android web
-!  window.Map 形似不合法只能用Map
-! onLayout 事件
- DONE:
-    本地模块alias 支持类似  source/xx.png (看config文件配置) 
-    eflow接入  window都要去掉
 
-
+  ListView的转化
+  onLayout 事件
+  Animated
+  JSX 成员表达式
+  icon
+  
