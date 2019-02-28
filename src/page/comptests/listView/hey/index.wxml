@@ -1,0 +1,10 @@
+<View>
+<text>from hey 4 </text>
+<!-- <View wx:for="{{source}}" >
+    <text bindtap="click" >
+      batch:{{item.batch}}-{{item.id}}
+    </text>
+    <image src="{{item.url}}" />
+</View> -->
+<slot></slot>
+</View>

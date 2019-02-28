@@ -15,7 +15,8 @@ export default class Page extends React.Component {
   constructor(props) {
     super(props)
     this.state= {
-        age:18
+        age:18,
+        ts: Date.now()
     }
   }
   config = {
@@ -39,6 +40,11 @@ export default class Page extends React.Component {
   call=()=>{
     this.refs.sc.refCall()
   }
+
+  changerenderPropComp=()=>{
+     this.setState({ts:Date.now()})
+  }
+
   render() {
  
      return (
@@ -47,16 +53,18 @@ export default class Page extends React.Component {
           {/* {this.aUIGeneate()} */}
           <Text>i'm page ,the 'where' prop from parent won't comes : {this.props.where}</Text>
          <Text onPress={this.call}>call the simpleComp's method from ref.xxx</Text>
+         <Text onPress={this.changerenderPropComp}>change text in renderPropComp</Text>
+
           <SimpleComp
             name="SimpleComp"  
             age ={this.state.age}
              ref={'sc'}
-            renderPropComp = {<Text>i'm  component passed from Parent</Text>}
+            renderPropComp = {<Text>{this.state.ts} i'm  component passed from Parent</Text>}
             onGetUI = {this.getUI}
             onClick = {this.onPress}
             click2 = {this.onPress}
           >
-            <Text>i'm children component</Text>
+            <Text>{this.state.ts}  i'm a  children component</Text>
           </SimpleComp>
       </View>
      );

@@ -20,6 +20,8 @@
   },
   "include": ["src"],
   "exclude": [
+    "build",
+    "dist",
     "__tests__",
     "node_modules",
     "dist",

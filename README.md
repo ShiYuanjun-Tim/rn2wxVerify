@@ -57,11 +57,12 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 
 #### 主要改动的项目有
 
+- packages/eslint-plugin-taro
 - packages/taro
 - packages/taro-cli
 - packages/rnapiPatch4wx  【新】集中存放rn转译译wx用的补丁
 - packages/taro-transformer-wx
-
+- packages/taro-weapp
 
 > ###  **Test Point**
 
@@ -132,15 +133,18 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
   2. 如果rn有 wx没有 ： 需要提供patch保证wx端的不报错/ 或者编译成wx组件（Touchable*）
   3. rn有wx也有但是接口不一样 ： 可以用方法1 以一端接口为主/ 或者用编译方式更改源码
 
-   - 补充RN缺失的Button组件 ,以wx的api为主 GAI:5 把onPress改为bindtap
-   - Touchable.* 在编译成View GAI:6
-   - Image的source转化为src
-
 > #####  **路由/页面跳转**
 
 > #####  **事件**
-
+  事件属性必须on**模式 
 > #####  **平台判断**
+
+  1. process.env.TARO_ENV=="weapp"
+    编译时判断 ，这种方式在babel编译过程中微信端代码会被pick出来而其他非微信平台代码会被删除
+  2. Platform=="weapp"
+    代码会保留在源文件代码中，运行时判断
+  3. 平台后缀   xxx.wx.js
+    编译过程自动选择平台文件，非平台文件不会被加载打包
 
 > #####  **其他兼容wx的点**
 
@@ -176,7 +180,7 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
     exports.TS_EXT = ['.ts', '.tsx']
 11. GAI:15 eflow wrap的替换
 12. GAI:16 jsx方法的支持  采用eject方式/不采用template方式
-
+13. GAI:17 ListView相关改动  新增属性 __wxBatchCount 用于根据实际数据大小需求 合理调整单次setData的列表数据条数防止超出1m
 
 > ##### RN代码兼容写法
 
@@ -185,8 +189,14 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 - **只有flex容器（wx需要用flexContainer标记）中的flex属性才能如预期效果，flex容器外的独立flex使用可能在rn可行wx不可行**
 - 含有绝对定位元素的的容器本身必须是非static（默认）定位
 - 不要使用window这个东西
-- 组件属性传递无法使用对象结构写法  类似 <Comp {...someObj}/>
+- 组件属性传递无法使用对象结构写法  类似 <Comp {...someObj}/> 可用 <Comp newprop={someObj}/>
 - render尽量不要有多出口 最好先把null提前处理不要把返回的逻辑包在条件中
 - RN导入的模块不要用as改名
+- 构造函数中不要写 动态初始化的state的逻辑，只写静态的无副作用的（多次执行状态一致的）state初始化逻辑
+- render中避免不必要的重新赋值 能直接用this.state/props.xxx 为最优,尤其是列表的数据源属性
+- 列表页添加配置 __wxBatchCount控制长列表单词更新数据量 默认100, 
+    - 保证数据连续性，重置操作的数据量不应比现有数据更多，不然会认为是一次增量更新 (留待需要在做)
+    - 增量更新默认是认为只需要添加多处的那部分，之前长度的部分默认认为是一样的
+    - 不要2次setState({dataSource})的数据一样长，这样会导致逐条比较获取 diffdata性能很差
 
 
