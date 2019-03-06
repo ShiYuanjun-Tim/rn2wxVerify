@@ -12,7 +12,7 @@ export default class Page extends React.Component {
     }
   }
 
-  
+ 
   simpleParam(a,b){
     return <View><Text> simpleParam fun[ a:{a}, b:{b + this.state.casev}]</Text></View>
   }
@@ -30,11 +30,11 @@ export default class Page extends React.Component {
   }
 
   dobuleReturn() {
-  return ['A','B'].map(num=>{return <View><Text> {num}</Text> </View> } )
+  return ['A','B'].map(num=>{return <View key={num}><Text> {num}</Text> </View> } )
   }
 
   dobuleReturn222= () =>{
-    return ['Ax','Bx'].map(num=>{return <View><Text> {num}</Text> </View> } )
+    return ['Ax','Bx'].map(num=>{return <View key={num}><Text> {num}</Text> </View> } )
    }
 
 
@@ -42,10 +42,10 @@ export default class Page extends React.Component {
   return ['A','B'].map(num=>{
       switch(num) {
         case "A" : {
-          return <Text> aaA </Text>
+          return <Text key="Aaa"> aaA </Text>
         }
         case "B" : {
-          return <Text> BBB </Text>
+          return <Text key="Bvv"> BBB </Text>
         }
       }
   } )
@@ -79,11 +79,6 @@ export default class Page extends React.Component {
     return view;
   }  
 
-
-  // evtFun(click){
-  //   return <View><Text onPress={click}> generate by evtfun[ click me]</Text></View>
-  // }
-
   handler(){
     _alert("event triggered")
   }
@@ -91,8 +86,9 @@ export default class Page extends React.Component {
   // 测试参数名和map中一致
   hehe(num){
     const { number } = num
-    return <View><Text> hehe {number}</Text></View>
+    return <View key={number}><Text> hehe {number}</Text></View>
   }
+
 
   render() {
      
@@ -101,7 +97,7 @@ export default class Page extends React.Component {
     const des = {aa:'desA',b:{c:"cccc",d:'dddd'},d:["ee",'ff','others']}
 
     return <View style={{ flex: 1, paddingTop: 40 }}>
-        {
+      {
         this.simpleParam(1,2) 
       }
       {
@@ -129,10 +125,28 @@ export default class Page extends React.Component {
         [{number:"one"},{number:"two"}].map(num=>{
           return this.hehe(num)
         }  )
-      } 
+      }
       <Comp></Comp>
+
+      {this.nest()}    
+      
     </View >
   }
+
+  // ############################
+  nest(){
+    return <View><Text> nest</Text> {this.nest1()} </View>
+  }
+
+  nest1(b='aaa', ...othre){
+    return <View><Text>nest1 b:{b} {this.nest2('nest1')}</Text> </View>
+  }
+
+  nest2(a,b=100){
+    const some = 100
+    return   "nest2 receive a:"+a +" from upstream, result:"+ b * some
+  }
+
 }
 
 // export default Page

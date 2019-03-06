@@ -145,7 +145,7 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
     代码会保留在源文件代码中，运行时判断
   3. 平台后缀   xxx.wx.js
     编译过程自动选择平台文件，非平台文件不会被加载打包
-
+  4. 直接编写微信小程序代码，在用一层rn代码做简单包装即可
 > #####  **其他兼容wx的点**
 
 1. 微信头bar的配置  =》 this.config
@@ -174,6 +174,15 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 7. GAI:11 scrollview的method scrollTo/scrollToEnd方法的转码实现 ，通过ref的方法注入实现
 8. GAI:12 新增模块rnapiPatch4wx 主要提供RN组件在wx端的mock实现，并且在导入组件时的替换
 9. GAI:13  嵌套解析npm依赖时指定不需要解析的路径/不可能用到 ，【理想情况该把导入都remove掉】
+ ```
+     ignoredRequire:[ //regexp 数组，用来去除require时候不必要的导入,利用全路径匹配以下的路径，match则删除require
+        '@yqb/rnframework/lib/token/cashier',
+        process.cwd() + '/config/locale',
+        // axios库中wx端名确不会有如下代码的使用
+        'node_modules/axios/lib/adapters',
+        /\.(web|ios|android)\.?/    
+      ]
+```
 10. GAI:14 文件解析后后缀, 本地文件也是优先使用带平台的代码: 比如require('./a') 会尝试a.wx.js a.js,不解析 平台文件ios android web
     packages/taro-cli/src/util/index.js 配置文件后缀 use in resolveScriptPath
     exports.JS_EXT = ['.js', '.jsx']
@@ -198,5 +207,5 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
     - 保证数据连续性，重置操作的数据量不应比现有数据更多，不然会认为是一次增量更新 (留待需要在做)
     - 增量更新默认是认为只需要添加多处的那部分，之前长度的部分默认认为是一样的
     - 不要2次setState({dataSource})的数据一样长，这样会导致逐条比较获取 diffdata性能很差
-
+- 不要使用WX端原生组件的名字比如Icon之类的， 并且对于导入的UI模块不要去用as来重命名
 

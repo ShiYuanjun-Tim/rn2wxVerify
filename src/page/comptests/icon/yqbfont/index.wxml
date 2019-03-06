@@ -1,0 +1,2 @@
+ <text class="yqb_font_  {{name}}" style="font-size:{{size}}px;color:{{color}}"></text>
+ <slot></slot>
