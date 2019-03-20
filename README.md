@@ -16,8 +16,7 @@ babel版本使用 6.X 不要使用7
 
 #### npm包依赖 
 ```
-npm install babel-preset-env --save-dev
-npm install babel-plugin-transform-decorators-legacy --save-dev 
+npm install babel-preset-env  babel-plugin-transform-decorators-legacy --save-dev
 
 <!-- use npm link to install the followings packages in rn2wx branched  -->
 npm link path/to/the/module
@@ -25,7 +24,12 @@ npm link path/to/the/module
 npm link /Users/syj/WS/rn2wx/packages/taro
 npm link /Users/syj/WS/rn2wx/packages/rnapiPatch4wx
 npm link /Users/syj/WS/rn2wx/packages/taro-weapp
+
 npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
+npm link /Users/syj/WS/rn2wx/packages/taro-plugin-uglifyjs
+npm link /Users/syj/WS/rn2wx/packages/taro-plugin-csso
+
+npm link /Users/syj/WS/frameworkRnWeb
 ```
 #### 配置文件
 1. 根目录下的config文件夹 需要taro的配置，用于配置代码转译行为：
@@ -190,6 +194,10 @@ npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
 11. GAI:15 eflow wrap的替换
 12. GAI:16 jsx方法的支持  采用eject方式/不采用template方式
 13. GAI:17 ListView相关改动  新增属性 __wxBatchCount 用于根据实际数据大小需求 合理调整单次setData的列表数据条数防止超出1m
+14. GAI:18 提供onLayout回调支持 用于获取组件的绘制完成后的大小定位 
+    -  出现onLayout的组件上ref属性不能使用string来做，必须是回调或者可以没有
+    -  onLayout 只会在didMount时候调用一次，并不会重复触发
+
 
 > ##### RN代码兼容写法
 

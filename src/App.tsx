@@ -6,7 +6,7 @@ import {_alert} from "./page/utils"
 // import Page from "./page/comptests/adapter/clickable"
 // import Page from "./page/comptests/adapter/scrollview"
 // import Page from "./page/comptests/adapter/template"
-import Page from "./page/comptests/adapter/onlayout"
+import Page from "./page/comptests/adapter/layouttest"
 // import Page from "./page/eflow/index"
 // import Page from "./page/catalogHomeExample"
 // import Page from "./page/comptests/listView/index"
@@ -21,7 +21,7 @@ import Page from "./page/comptests/adapter/onlayout"
       // "page/comptests/adapter/clickable",
       // "page/comptests/adapter/scrollview",
       // "page/comptests/adapter/template",
-      "page/comptests/adapter/onlayout",
+      "page/comptests/adapter/layouttest",
       // "page/eflow/index",
       // "page/catalogHomeExample/index",
       // "page/comptests/listView/index",
