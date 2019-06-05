@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, Text, ListView,  Image } from 'react-native';
 import { _alert } from "../../utils"
+import { getParentCatalogList } from 'src/page/catalogHomeExample/data';
 
 
 let id=0
@@ -9,31 +10,26 @@ function create_UUID(){
 }
 
 let batch = 0
+const urls = [
+     'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
+    'http://www.wxapp-union.com/special/section1.png',
+     'http://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpg',
+];
 function mockData(step=20){
   let b = ++batch
   const ts = Date.now()
 
-  return  Array(step).fill(0).map((()=>({
+  return  Array(step).fill(0).map(((v,ind)=>({
     batch: b,
     ts,
     id:create_UUID(),
-    url:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-    url2:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url3:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url4:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url5:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url6:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url7:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url8:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url9:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url70:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-url12:'http://www.wxapp-union.com/template/win8_2_zuk/src/logo.png',
-
+    url :  urls[ind%urls.length ]
+    dump:"http://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpghttp://www.wxapp-union.com/data/attachment/portal/201902/27/102919oftjbyb9fryy7e9e.jpeg.thumb.jpg"
   })))
 } 
 
 
-export default class Page extends React.Component<any,any> {
+ class Page extends React.Component<any,any> {
 
   scrollV = null
   raw:any
@@ -55,7 +51,8 @@ export default class Page extends React.Component<any,any> {
     super(prop)
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state ={
-      dataSource: []
+      dataSource: [],
+      pp:'A'
     }
   }
 
@@ -75,10 +72,34 @@ export default class Page extends React.Component<any,any> {
   //   super.setState(obj,call)
   // }
 
+
+  getContent(pp){
+    let view= null;
+    switch(pp){
+
+      case "A":{
+
+        view = <ListView  style={{ flex:1,  height:500}}   
+         dataSource={this.ds.cloneWithRows(this.state.dataSource)}
+         renderRow={this.perrow}
+         onEndReachedThreshold={100}
+         onEndReached = {this.reachEnd}
+        />;
+        break;
+      }
+      default:{
+        view=<Text > empty</Text>
+      }
+    }
+    return view;
+
+  }
+
   perrow = (data,sid:string,rowid)=>{
     console.log(sid)
-    return <View >
+    return <View  key={rowid} ss={rowid}>
        <Text onPress={this.click.bind(this,rowid)}>batch:{data.batch}-{data.id}</Text>
+       <Text>url</Text>
       <Image source={{uri:data.url}} style={{width: 300 ,height:50}}  ></Image>
     </View>
   }
@@ -103,8 +124,39 @@ export default class Page extends React.Component<any,any> {
       dataSource : mockData(30)
     })
   }
-   
+
+  public ss(data){
+    return <View><Text>{data.id}-{data.url}  </Text></View>
+  } 
+  public header(){
+    return <View><Text> Header  </Text></View>
+  } 
+  public footer(){
+    return <View><Text> Footer </Text></View>
+  } 
+
   render() {
+
+    let view= null;
+    switch("A"){
+
+      case "A":{
+
+        view = <ListView  style={{ flex:1,  height:500}}   
+         dataSource={this.ds.cloneWithRows(this.state.dataSource)}
+         renderRow={this.perrow}
+         onEndReachedThreshold={100}
+         onEndReached = {this.reachEnd}
+         renderHeader = {this.header}
+         renderFooter = {this.footer}
+        />;
+        break;
+      }
+      default:{
+        view=<Text > empty</Text>
+      }
+    }
+     
 
      return <View style={{flex:1, paddingTop: 40}}>
       <View><Text onPress={this.huge}> load huge data</Text></View> 
@@ -114,20 +166,15 @@ export default class Page extends React.Component<any,any> {
           return this.perrow(data,'ss',index)
         })}
       </hey> */}
-      
-      
-      <ListView  style={{ flex:1,  height:500}}   
-       dataSource={this.ds.cloneWithRows(this.state.dataSource)}
-       renderRow={this.perrow}
-
-       onEndReachedThreshold={100}
-       onEndReached = {this.reachEnd}
-      />
+       
+     {/* {this.getContent(this.state.pp)} */}
   
-
+      {view}
     </View>
   }
 }
+
+export default Page;
 
 /* 
  <ScrollView style={internal_inline_style({ flex: 1, height: 500 })} 

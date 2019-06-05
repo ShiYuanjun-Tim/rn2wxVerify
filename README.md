@@ -1,35 +1,37 @@
+安装 
 
+`npm i -g @tarojsrn/cli`
 
-  ListView的转化
-  onLayout 事件
-  Animated
-  JSX 成员表达式
-  icon
+项目中添加 **配置文件**
+
+运行 
+`tarorn build --type weapp`
   
 
 ## 测试RN2WX转换特性的项目
 配合[taro-rn2wx分支代码](https://github.com/ShiYuanjun-Tim/taro) 做转化测试
 
 > ###  **Prerequest**
-安装依赖时node版本不能太高推荐 >8.0 && <10.0 /  npm >5.7 && <6.0  测试nodev8.15.0 (npm v5.10.0) 可以
+安装依赖时node版本不能太高推荐 >8.0 && <10.0 /  npm5.7 > && <6.0  测试nodev8.15.0 (npm v5.10.0) 可以
 babel版本使用 6.X 不要使用7
 
 #### npm包依赖 
 ```
-npm install babel-preset-env  babel-plugin-transform-decorators-legacy --save-dev
+npm install babel-preset-env  babel-plugin-transform-decorators-legacy axios-miniprogram-adapter --save-dev
 
 <!-- use npm link to install the followings packages in rn2wx branched  -->
 npm link path/to/the/module
 
+npm link /Users/syj/WS/frameworkRnWeb
 npm link /Users/syj/WS/rn2wx/packages/taro
 npm link /Users/syj/WS/rn2wx/packages/rnapiPatch4wx
 npm link /Users/syj/WS/rn2wx/packages/taro-weapp
-
 npm link /Users/syj/WS/rn2wx/packages/taro-plugin-babel
+
 npm link /Users/syj/WS/rn2wx/packages/taro-plugin-uglifyjs
 npm link /Users/syj/WS/rn2wx/packages/taro-plugin-csso
 
-npm link /Users/syj/WS/frameworkRnWeb
+
 ```
 #### 配置文件
 1. 根目录下的config文件夹 需要taro的配置，用于配置代码转译行为：
@@ -216,4 +218,4 @@ npm link /Users/syj/WS/frameworkRnWeb
     - 增量更新默认是认为只需要添加多处的那部分，之前长度的部分默认认为是一样的
     - 不要2次setState({dataSource})的数据一样长，这样会导致逐条比较获取 diffdata性能很差
 - 不要使用WX端原生组件的名字比如Icon之类的， 并且对于导入的UI模块不要去用as来重命名
-
+- 不要在构造函数中做有副作用的操作比如异步操作等, 如果需要根据父级传下的prop数据来做请求，请把代码写在DidMount阶段（只有这里才能争取获取数据，**如果父亲节点是个page则一定要如此**）

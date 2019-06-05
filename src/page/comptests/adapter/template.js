@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView,StyleSheet } from 'react-native';
 import { _alert } from "../../utils"
 
 import Comp from './iosComp'
-export default class Page extends React.Component {
+ class Page extends React.Component {
 
   constructor(prop) {
     super(prop)
@@ -12,7 +12,7 @@ export default class Page extends React.Component {
     }
   }
 
- 
+   
   simpleParam(a,b){
     return <View><Text> simpleParam fun[ a:{a}, b:{b + this.state.casev}]</Text></View>
   }
@@ -53,22 +53,23 @@ export default class Page extends React.Component {
 
   propMethod=(smoe)=><View><Text> propMethod {smoe}</Text> </View>  
    
+
   switchMethod = (loadStatus) => {
      let view = null;
      const def = null//<View><Text> default </Text> </View>
     switch (loadStatus) {
       case "loading": {
         view = (
-          <View><Text> loading </Text> </View> 
+          <View style={style.test1}><Text> loading </Text> </View> 
         );
         break;
       }
       case "failed": {
-        view =  <View><Text> failed </Text> </View> 
+        view =  <View style={style.test1}><Text> failed </Text> </View> 
         break;
       }
       case "loaded": {
-        view =  <View><Text> loaded </Text> </View> 
+        view =  <View style={style.test1}><Text> loaded </Text> </View> 
         break;
       }
       default: {
@@ -81,13 +82,41 @@ export default class Page extends React.Component {
 
   handler(){
     _alert("event triggered")
-  }
+  } 
 
   // 测试参数名和map中一致
-  hehe(num){
+  hehe(num,index){
     const { number } = num
-    return <View key={number}><Text> hehe {number}</Text></View>
+    
+    let type = typeof number
+    
+    return index!==0 ? (  type =='number'? this._str(num):<View ><Text> hehe _num:{number}</Text></View> )
+    :  this._num(num)
+     
   }
+
+  mix(num,index){
+
+     const nm = num.number, isNum = (typeof nm !== 'number' )
+     const isValid = nm != 0;
+
+    return isValid
+      ? (
+       this.hehe(num, index)
+      )
+      : <Text>none</Text>  
+  }
+
+  _num(num){
+    const { number ,bb = "" } = num
+     
+    return <View > {number ==0 ? null: this.aa(number , bb)}</View>
+  }
+
+  aa(number, bbname){
+    return number ==0 ? null: <Text> {`hehe sss_num:${number} ${bbname}`}</Text>
+  }
+
 
 
   render() {
@@ -96,8 +125,12 @@ export default class Page extends React.Component {
     const a=[1,2,3]
     const des = {aa:'desA',b:{c:"cccc",d:'dddd'},d:["ee",'ff','others']}
 
+    const mpe = [{ number: "one" }, { number: "two", bb: 'bb name' }, { number: 2 }, { number: 0 }].map((num, index) => {
+      return this.mix(num, index)
+    })
+
     return <View style={{ flex: 1, paddingTop: 40 }}>
-      {
+        {/* {
         this.simpleParam(1,2) 
       }
       {
@@ -120,16 +153,20 @@ export default class Page extends React.Component {
       {this.switchMethod('loading')}   
      
 
-      {<Text> 111</Text>}
+      
       {
         [{number:"one"},{number:"two"}].map(num=>{
-          return this.hehe(num)
+          return this._str(num)
         }  )
       }
-      <Comp></Comp>
+      <Comp></Comp> 
 
-      {this.nest()}    
-      
+      {this.nest()}     
+       
+        {mpe}
+        */} 
+
+{this.switchMethod('loading')} 
     </View >
   }
 
@@ -149,4 +186,11 @@ export default class Page extends React.Component {
 
 }
 
-// export default Page
+const style = StyleSheet.create({
+  test1:{
+    backgroundColor:"red"
+  }
+})
+
+
+export default Page
